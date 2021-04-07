@@ -23,6 +23,7 @@ License:
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+from __future__ import absolute_import
 
 import os
 import logging
@@ -32,12 +33,35 @@ from pyper.vendor.Qt import QtCore
 from pyper.vendor.Qt import QtWidgets
 from pyper.vendor.Qt import _QtUiTools
 
-from . import model
-from . import proxymodel
+try:
+    from . import model
+    from . import proxymodel
+except Exception as e:
+    try:
+        import model
+        import proxymodel
+    except (ImportError):
+        pass
 
-import importlib
-importlib.reload(model)
-importlib.reload(proxymodel)
+from imp import reload
+reload(model)
+reload(proxymodel)
+
+
+class CustomLineEdit(QtWidgets.QLineEdit):
+    """docstring for CustomLineEdit."""
+
+    def __init__(self):
+        super(CustomLineEdit, self).__init__()
+
+    def dragEnterEvent(self, e):
+        if e.mimeData().hasFormat('text/plain'):
+            e.accept()
+        else:
+            e.ignore()
+    
+    def dropEvent(self, e):
+        self.setText(e.mimeData().text())
 
 
 class UiLoader(_QtUiTools.QUiLoader):
@@ -84,9 +108,9 @@ class MainWidget(QtWidgets.QWidget):
         # define the model and its proxy model
         self._model = model.Model(self._appModel, headerNames, nodepath)
         self._proxyModel = proxymodel.ProxyModel(self._model)
-        self._showname = True
+        self._showname = False
         self._showlabel = True
-        self._showdiffonly = True
+        self._showdiffonly = False
 
         # define parent in case this widget is not part of a parent widget
         if not parent:
@@ -96,6 +120,7 @@ class MainWidget(QtWidgets.QWidget):
         self.setup_ui(nodepath)
 
         # some cosmetics
+        self.resize(400, 600)
         self.centerWidget()
 
     def model():
@@ -145,29 +170,54 @@ class MainWidget(QtWidgets.QWidget):
     def setup_ui(self, nodepath=""):
         """ """
         # build the ui
-        uifile = os.path.join(os.path.dirname(__file__), "ui/widget.ui")
-        UiLoader(self).load(uifile)        
-        self.setWindowTitle(__name__.split(".")[-2].capitalize())
+        # uifile = os.path.join(os.path.dirname(__file__), "ui/widget.ui")
+        # UiLoader(self).load(uifile)        
+        # I could not figure out how to replace a promoted widget in the .ui file with the UiLoader()
+        # So I build the entire widget manually
 
-        # tell the view which model to display
-        self.uiTableView.setModel(self._proxyModel)
+        # build the ui
+        self.setWindowTitle(__name__.split(".")[-2].capitalize())
+        
+        # create the widgets
+        self.uiLineEdit = CustomLineEdit()
+        self.uiTableView = QtWidgets.QTableView()
+        self.uiVerticalLayout = QtWidgets.QVBoxLayout()
+
+        # configure the layout
+        self.setLayout(self.uiVerticalLayout)
+        self.uiVerticalLayout.addWidget(self.uiLineEdit)
+        self.uiVerticalLayout.addWidget(self.uiTableView)
+        self.uiVerticalLayout.setMargin(0)
 
         # configure the view
+        self.uiTableView.setModel(self._proxyModel) # tell the view which model to display
+        self.uiTableView.setShowGrid(False)
+        self.uiTableView.setTabKeyNavigation(False)
+        self.uiTableView.setAlternatingRowColors(True)
+        self.uiTableView.setSelectionBehavior(QtWidgets.QTableView.SelectRows)
+        self.uiTableView.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.uiTableView.setWordWrap(False)
+        self.uiTableView.horizontalHeader().setStretchLastSection(True)
+        self.uiTableView.horizontalHeader().setHighlightSections(True)
         self.uiTableView.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Interactive)
         self.uiTableView.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Interactive)
         self.uiTableView.horizontalHeader().resizeSection(0, 200)
         self.uiTableView.horizontalHeader().resizeSection(1, 50)
+        self.uiTableView.verticalHeader().setVisible(False)
+        self.uiTableView.verticalHeader().setHighlightSections(True)
         self.uiTableView.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-
-        # define how the proxy model should sort the view
-        self._proxyModel.sort(0, QtCore.Qt.AscendingOrder)
+        self.uiTableView.verticalHeader().setDefaultSectionSize(16)
+        self.uiTableView.verticalHeader().setMinimumSectionSize(10)
 
         # define a delegate to override the inherited color palette
         delegate = model.MyDelegate(self)
         self.uiTableView.setItemDelegate(delegate)
 
+        # define how the proxy model should sort the view
+        self._proxyModel.sort(0, QtCore.Qt.AscendingOrder)
+        
         # add actions
-        self.uiTableView.addAction(self.actionRefresh)
+        # self.uiTableView.addAction(self.actionRefresh)
 
         # define the refresh function to use (choose between self or parent)
         if hasattr(self.parent(), 'refresh'):
@@ -181,10 +231,12 @@ class MainWidget(QtWidgets.QWidget):
         self.uiLineEdit.textChanged.connect(lambda: self.spreadsheetChanged.emit())   # a change in node path fields emits spreadsheetChanged 
         self.model.dataChanged.connect(lambda: self.spreadsheetChanged.emit())      # a change in the model emits spreadsheetChanged
         self.spreadsheetChanged.connect(refreshFunction)                              # when spreadsheetChanged is triggered, refresh the spreadsheet
-        self.actionRefresh.triggered.connect(refreshFunction)               # when actionRefresh is triggered, refresh the spreadsheet
+        # self.actionRefresh.triggered.connect(refreshFunction)               # when actionRefresh is triggered, refresh the spreadsheet
 
         # initialize uiLineEdit with the node path
-        self.uiLineEdit.setText(nodepath)       
+        self.uiLineEdit.setText(nodepath)
+        self.showdiffonly = False
+        self.showlabel = True
 
     def closeEvent(self, event):
         name = __name__.split('.')[-2].capitalize() # note: [-2] to get the name of the module above .ui

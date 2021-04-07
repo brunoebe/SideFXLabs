@@ -32,17 +32,19 @@ Content-Type: text/plain
 
 sopflags sopflags = 
 comment ""
-position -0.52451 0.127778
-connectornextid 0
+position 1.5521 -2.21402
+connectornextid 1
 flags =  lock off model off template off footprint off xray off bypass off display on render on highlight off unload off savedata off compress on colordefault on exposed on
 outputsNamed3
 {
 }
 inputsNamed3
 {
+0 	heightfield_noise1 1 1 "input1"
 }
 inputs
 {
+0 	heightfield_noise1 0 1
 }
 stat
 {
@@ -3658,7 +3660,7 @@ f	[ 0	locks=0 ]	(	[ f1	1 ] 	[ f2	240 ] 	1	)
 take	[ 0	locks=0 ]	(	_current_	)
 camera	[ 0	locks=0 ]	(	../../objnet1/cam	)
 vm_uvtype	[ 0	locks=0 ]	(	udim	)
-vm_uvunwrapres	[ 0	locks=0 ]	(	[ vm_uvunwrapresx	512 ] 	[ vm_uvunwrapresy	512 ] 	)
+vm_uvunwrapres	[ 0	locks=0 ]	(	[ vm_uvunwrapresx	2048 ] 	[ vm_uvunwrapresy	2048 ] 	)
 uvresmenu	[ 0	locks=0 ]	(	0	)
 vm_ptexmapminres	[ 0	locks=0 ]	(	8	8	)
 vm_uvptexminresmenu	[ 0	locks=0 ]	(	0	)
@@ -3726,7 +3728,7 @@ vm_uvobject1	[ 0	locks=0	autoscope=0 ]	(	../../objnet1/LOW	)
 vm_uvcageobject1	[ 0	locks=0	autoscope=0 ]	(	""	)
 vm_uvhires1	[ 0	locks=0	autoscope=0 ]	(	../../objnet1/HIGH	)
 vm_uvoutputpicture1	[ 0	locks=0	autoscope=0 ]	(	$HIP/DeleteMe.exr	)
-images6	[ 0	locks=0 ]	(	0	0	0	0	0	)
+images6	[ 0	locks=0 ]	(	1	1	1	1	1	)
 main3	[ 0	locks=0 ]	(	0	0	)
 vm_bake_normalizep	[ 0	locks=0 ]	(	"on"	)
 vm_extractimageplanes	[ 0	locks=0 ]	(	"off"	)
@@ -3765,7 +3767,7 @@ vm_quickplane_N_channel	[ 0	locks=0 ]	(	N	)
 vm_bake_skipcf	[ 0	locks=0 ]	(	"on"	)
 vm_bake_layerexport	[ 0	locks=0 ]	(	"on"	)
 vm_bake_samples	[ 0	locks=0 ]	(	16	)
-vm_bake_usemikkt	[ 0	locks=0 ]	(	[ vm_bake_usemikkt	0 ] 	)
+vm_bake_usemikkt	[ 0	locks=0 ]	(	[ vm_bake_usemikkt	1 ] 	)
 vm_bake_tangentnormalflipx	[ 0	locks=0 ]	(	[ vm_bake_tangentnormalflipx	0 ] 	)
 vm_bake_tangentnormalflipy	[ 0	locks=0 ]	(	[ vm_bake_tangentnormalflipy	0 ] 	)
 vm_bake_tangentnormalincludedisp	[ 0	locks=0 ]	(	"on"	)
@@ -3796,7 +3798,7 @@ vm_transparentsamples	[ 0	locks=0 ]	(	4	)
 vm_samplelock	[ 0	locks=0 ]	(	"off"	)
 vm_randomseed	[ 0	locks=0 ]	(	0	)
 vm_imageblur	[ 0	locks=0 ]	(	"on"	)
-objects4	[ 0	locks=0 ]	(	1	1	1	)
+objects4	[ 0	locks=0 ]	(	2	2	2	)
 vm_extractlinearplanes	[ 0	locks=0 ]	(	`propertys('vm_quickplane_Nt_channel','Nt')`,`propertys('vm_quickplane_Ds_channel','Ds')`,`propertys('vm_quickplane_Vd_channel','Vd')`,`propertys('vm_quickplane_Vdt_channel','Vdt')`,`propertys('vm_quickplane_Cv_channel','Cv')`,`propertys('vm_quickplane_Th_channel','Th')`,`propertys('vm_quickplane_Cu_channel','Cu')`,`propertys('vm_quickplane_N_channel','N')`,`propertys('vm_quickplane_P_channel','P')`	)
 vm_inlinestorage	[ 0	locks=0 ]	(	"off"	)
 vm_disable_plane1	[ 0	locks=0 ]	(	"on"	)
@@ -5763,7 +5765,7 @@ nodename	[ 0	locks=0 ]	(	"userdef"	)
 reload	[ 0	locks=0 ]	(	0	)
 subframes	[ 0	locks=0 ]	(	"off"	)
 overridesize	[ 0	locks=0 ]	(	"natural"	)
-size	[ 0	locks=0 ]	(	512	512	)
+size	[ 0	locks=0 ]	(	2048	2048	)
 sizemenu	[ 0	locks=0 ]	(	0	)
 filter	[ 0	locks=0 ]	(	box	)
 overrideaspect	[ 0	locks=0 ]	(	"off"	)
@@ -5827,7 +5829,7 @@ Content-Disposition: attachment; filename="hdaroot/cop2net1/file1.cop2"
 Content-Type: text/plain
 
 2
-256
+258
 0
 
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
@@ -5999,7 +6001,7 @@ coppath	[ 0	locks=0 ]	(	../flip1	)
 tres	[ 0	locks=0 ]	(	"natural"	)
 res	[ 0	locks=0 ]	(	512	512	)
 resmenu	[ 0	locks=0 ]	(	0	)
-copoutput	[ 8	locks=0 ]	(	[ copoutput	C:/Users/prisms/render/Terrain_N.tga ] 	)
+copoutput	[ 8	locks=0 ]	(	[ copoutput	F:/SideFX/Support/TerrainTools/render/Terrain_N.tga ] 	)
 mkpath	[ 0	locks=0 ]	(	"on"	)
 color	[ 0	locks=0 ]	(	C	)
 alpha	[ 0	locks=0 ]	(	A	)
@@ -6204,7 +6206,7 @@ Content-Disposition: attachment; filename="hdaroot/cop2net1/file2.cop2"
 Content-Type: text/plain
 
 2
-291
+308
 0
 
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
@@ -6275,7 +6277,7 @@ coppath	[ 0	locks=0 ]	(	../../cop2net1/flip2	)
 tres	[ 0	locks=0 ]	(	"natural"	)
 res	[ 0	locks=0 ]	(	512	512	)
 resmenu	[ 0	locks=0 ]	(	0	)
-copoutput	[ 8	locks=0 ]	(	[ copoutput	C:/Users/prisms/render/Terrain_H.tga ] 	)
+copoutput	[ 8	locks=0 ]	(	[ copoutput	F:/SideFX/Support/TerrainTools/render/Terrain_H.tga ] 	)
 mkpath	[ 0	locks=0 ]	(	"on"	)
 color	[ 0	locks=0 ]	(	C	)
 alpha	[ 0	locks=0 ]	(	A	)
@@ -7729,9 +7731,9 @@ version 0.8
 stdswitcher	[ 0	locks=0 ]	(	0	)
 window	[ 0	locks=0 ]	(	"offsetsize"	)
 units	[ 0	locks=0 ]	(	"uv"	)
-harea	[ 8	locks=0 ]	(	0	[ harea2	0.5 ] 	)
-varea	[ 8	locks=0 ]	(	0	[ varea2	0.5 ] 	)
-offset	[ 8	locks=0 ]	(	[ offset1	-0.5 ] 	[ offset2	-0.5 ] 	)
+harea	[ 8	locks=0 ]	(	0	[ harea2	0.25 ] 	)
+varea	[ 8	locks=0 ]	(	0	[ varea2	0.25 ] 	)
+offset	[ 8	locks=0 ]	(	[ offset1	-0 ] 	[ offset2	-0 ] 	)
 hold	[ 0	locks=0 ]	(	"on"	)
 }
 
@@ -9053,7 +9055,7 @@ sopflags sopflags =
 comment ""
 position -2.62643 -0.555999
 connectornextid 1
-flags =  lock off model off template on footprint off xray off bypass off display on render on highlight off unload off savedata off compress on colordefault on exposed on
+flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
 outputsNamed3
 {
 }
@@ -9240,8 +9242,8 @@ orient	[ 0	locks=0 ]	(	"zx"	)
 size	[ 0	locks=0 ]	(	1	1	)
 t	[ 0	locks=0 ]	(	0	0	0	)
 r	[ 0	locks=0 ]	(	0	0	0	)
-rows	[ 0	locks=0 ]	(	[ rows	0 ] 	)
-cols	[ 0	locks=0 ]	(	[ cols	0 ] 	)
+rows	[ 8	locks=0 ]	(	[ rows	500 ] 	)
+cols	[ 8	locks=0 ]	(	[ cols	500 ] 	)
 orderu	[ 0	locks=0 ]	(	4	)
 orderv	[ 0	locks=0 ]	(	4	)
 interpu	[ 0	locks=0 ]	(	"on"	)
@@ -9274,7 +9276,7 @@ sopflags sopflags =
 comment ""
 position -2.62643 5.08234
 connectornextid 2
-flags =  lock off model off template off footprint off xray off bypass off display off render off highlight off unload off savedata off compress on colordefault on exposed on
+flags =  lock off model off template on footprint off xray off bypass off display on render on highlight off unload off savedata off compress on colordefault on exposed on
 outputsNamed3
 {
 1 "output1"

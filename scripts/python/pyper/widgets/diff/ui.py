@@ -34,8 +34,8 @@ from pyper.vendor.Qt import _QtUiTools
 
 from pyper.widgets import spreadsheet
 
-import importlib
-importlib.reload(spreadsheet)
+from imp import reload
+reload(spreadsheet)
 
 class UiLoader(_QtUiTools.QUiLoader):
     def __init__(self, baseinstance):
@@ -53,7 +53,6 @@ class UiLoader(_QtUiTools.QUiLoader):
 
 
 class MainWidget(QtWidgets.QMainWindow):
-
     def __init__(self, appModel, parent=None):
         """ """
         super(MainWidget, self).__init__(parent)

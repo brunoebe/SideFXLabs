@@ -124,7 +124,7 @@ class Model(QtCore.QAbstractTableModel):
             # tell appModel to set the parms
             try:
                 self._appModel.setParms(parms)
-            except (Exception, e):
+            except Exception as e:
                 self._logger.error(e)
 
             # emit dataChange signal if not quiet
@@ -183,6 +183,8 @@ class Model(QtCore.QAbstractTableModel):
              parameter name n: {dictionnary with name, label, value, path},
             }
         """
+        # empty node dictionnary first
+        self._nodeDict = {}
         # get the node parameters as a list of paths...
         paths = self._appModel.getParms(self._nodePath)
         # ... then build a list of [name, value, flag, path]...
