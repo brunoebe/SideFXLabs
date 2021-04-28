@@ -1,0 +1,29 @@
+= Alternatives to... =
+
+#internal: labs::alternative_to
+#icon: none
+#tags: education
+
+""" This page proposes some alternatives to various nodes and workflows. """
+
+If you use this... ||
+  try this... || 
+    or this... || 
+      Examples ||
+
+[Attribute Create SOP|Node:/sop/attribcreate] | 
+  [Attribute Adjust SOP|Node:/sop/attribadjustfloat] | 
+    |
+      Load .hip file
+
+[Attribute Wrangle SOP|Node:/sop/attribwrangle] | 
+  [Carve SOP|Node:/sop/carve] |
+    [Extract Point From Curve SOP|Node:/sop/extractpointfromcurve] |
+      Load .hip file
+
+[Attribute Wrangle SOP|Node:/sop/attribwrangle] | 
+  [Point Velocity SOP|Node:/sop/pointvelocity] | 
+    |
+      Load .hip file
+
+
